@@ -24,7 +24,7 @@
     <properties>
         <!-- Build properties -->
         <maven.version>3.3.9</maven.version>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <node.version>v14.16.0</node.version>
         <npm.version>7.8.0</npm.version>
 
@@ -609,10 +609,10 @@
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                         <driver></driver>
-                        <url>jdbc:sqlserver://localhost:1433;database=LicentaFinal</url>
+                        <url>jdbc:sqlserver://localhost:1433;database=licenta</url>
                         <defaultSchemaName></defaultSchemaName>
                         <username>SA</username>
-                        <password>yourStrong(!)Password</password>
+                        <password>Bobo!((*1Password</password>
                         <referenceUrl>hibernate:spring:com.licenta.domain?dialect=org.hibernate.dialect.SQLServer2012Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>

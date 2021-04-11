@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:sqlserver://localhost:1433;database=LicentaFinal
+    url: jdbc:sqlserver://localhost:1433;database=licenta
     username: SA
-    password: yourStrong(!)Password
+    password: Bobo!((*1
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -46,7 +46,7 @@ spring:
   jpa:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
     host: localhost
     port: 25
