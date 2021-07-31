@@ -7,6 +7,7 @@ import LoadingBar from 'react-redux-loading-bar';
 
 import { Home, Brand } from './header-components';
 import { AdminMenu, EntitiesMenu, AccountMenu } from '../menus';
+import { ceil } from 'lodash';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -37,12 +38,14 @@ const Header = (props: IHeaderProps) => {
       <Navbar data-cy="navbar" light expand="sm" fixed="top" className="bg-light">
         <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
         <Brand />
-        <Collapse isOpen={menuOpen} navbar>
-          <Nav id="header-tabs" className="ml-auto" navbar>
+        <Collapse isOpen={menuOpen} navbar style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Nav>
             <Home />
             {props.isAuthenticated && <EntitiesMenu />}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
-            <AccountMenu isAuthenticated={props.isAuthenticated} />
+            <style className="d-flex align-items-end">
+              <AccountMenu isAuthenticated={props.isAuthenticated} />
+            </style>
           </Nav>
         </Collapse>
       </Navbar>

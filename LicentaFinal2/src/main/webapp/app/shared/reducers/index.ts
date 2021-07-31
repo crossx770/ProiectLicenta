@@ -10,6 +10,10 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+// prettier-ignore
+import judet from 'app/entities/judet/judet.reducer';
+// prettier-ignore
+import city from 'app/entities/city/city.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -22,8 +26,10 @@ const rootReducer = {
   passwordReset,
   password,
   settings,
+  city,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
+  judet,
 };
 
 export default rootReducer;

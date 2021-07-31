@@ -42,6 +42,8 @@
     "jwtSecretKey": "M2E0ZjgwOGZiMmU1OGVlMDQwZGExOTk5YTNiNThkNjBkODg0NjNlZTE0NDc3YTJjNTdiZWJkZTI4MDQ5MmY1NTQ5MzdhMzE2NzBjZWM4ZjQ2YThlZjBjNDYyMDkzOTI0ZWZlMTE0NDNhMWJmMGQxNmEyMjZlMDhkNjY5ZjZhYWM=",
     "devServerPort": 9060,
     "clientPackageManager": "npm",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1627720097000,
+    "entities": ["Judet", "City"]
   }
 }

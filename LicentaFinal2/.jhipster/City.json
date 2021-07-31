@@ -1,0 +1,27 @@
+{
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "1",
+      "fieldValidateRulesMaxlength": "30"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "judet",
+      "otherEntityName": "judet",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "id"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "City",
+  "changelogDate": "20210731082817"
+}

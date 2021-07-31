@@ -32,8 +32,8 @@ spring:
       indent-output: true
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
-    url: jdbc:sqlserver://localhost:1433;database=Licenta
+    contexts: dev
+    url: jdbc:sqlserver://localhost:1433;database=licenta
   mail:
     host: localhost
     port: 25
@@ -44,7 +44,7 @@ spring:
   r2dbc:
     url: r2dbc:mssql://localhost:1433/Licenta
     username: SA
-    password: yourStrong(!)Password
+    password: Bobo!((*1
   thymeleaf:
     cache: false
 
