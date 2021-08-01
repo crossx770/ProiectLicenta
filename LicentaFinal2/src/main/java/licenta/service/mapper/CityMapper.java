@@ -10,4 +10,10 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = { JudetMapper.class })
 public interface CityMapper extends EntityMapper<CityDTO, City> {
     CityDTO toDto(City s);
+
+    @Named("name")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    CityDTO toDtoName(City city);
 }

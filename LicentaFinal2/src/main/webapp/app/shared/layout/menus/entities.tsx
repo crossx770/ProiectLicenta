@@ -11,6 +11,12 @@ const entityMenuItems = (
     <MenuItem icon="thumbtack" to="/city">
       Cities
     </MenuItem>
+    <MenuItem icon="toolbox" to="/category">
+      Category
+    </MenuItem>
+    <MenuItem icon="tools" to="/sub-category">
+      Subcategory
+    </MenuItem>
   </>
 );
 

@@ -11,11 +11,11 @@ const accountMenuItemsAuthenticated = (
     <MenuItem icon="lock" to="/account/password" data-cy="passwordItem">
       Password
     </MenuItem>
-    <MenuItem icon="sign-out-alt" to="/logout" data-cy="logout">
-      Sign out
-    </MenuItem>
     <MenuItem icon="clipboard-list" to="/orders" data-cy="">
       Orders
+    </MenuItem>
+    <MenuItem icon="sign-out-alt" to="/logout" data-cy="logout">
+      Sign out
     </MenuItem>
   </>
 );

@@ -13,4 +13,10 @@ public interface JudetMapper extends EntityMapper<JudetDTO, Judet> {
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     JudetDTO toDtoId(Judet judet);
+
+    @Named("name")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    JudetDTO toDtoName(Judet judet);
 }

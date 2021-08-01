@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity UserDetails.
+    -->
+    <changeSet id="20210801123240-1" author="jhipster">
+       <addColumn tableName="jhi_user">
+           <column
+               name="judet_id"
+               type="bigint"
+           />
+           <column
+               name="city_id"
+               type="bigint"
+           />
+           <column
+               name="phone"
+               type="varchar(10)"
+           />
+           <column
+               name="address"
+               type="varchar(50)"
+           />
+       </addColumn>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210801123240-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="judet_id"
+                                 baseTableName="jhi_user"
+                                 constraintName="fk_user__judet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="judet"/>
+
+        <addForeignKeyConstraint baseColumnNames="city_id"
+                                 baseTableName="jhi_user"
+                                 constraintName="fk_user__city_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="city"/>
+
+    </changeSet>
+</databaseChangeLog>

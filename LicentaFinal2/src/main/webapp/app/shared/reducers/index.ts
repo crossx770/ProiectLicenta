@@ -14,6 +14,10 @@ import passwordReset, { PasswordResetState } from 'app/modules/account/password-
 import judet from 'app/entities/judet/judet.reducer';
 // prettier-ignore
 import city from 'app/entities/city/city.reducer';
+// prettier-ignore
+import category from 'app/entities/category/category.reducer';
+// prettier-ignore
+import subCategory from 'app/entities/sub-category/sub-category.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -27,6 +31,8 @@ const rootReducer = {
   password,
   settings,
   city,
+  category,
+  subCategory,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
   judet,

@@ -34,6 +34,9 @@ import { faWrench } from '@fortawesome/free-solid-svg-icons/faWrench';
 import { faClipboardList } from '@fortawesome/free-solid-svg-icons/faClipboardList';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons/faLocationArrow';
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons/faThumbtack';
+import { faToolbox } from '@fortawesome/free-solid-svg-icons/faToolbox';
+import { faTools } from '@fortawesome/free-solid-svg-icons/faTools';
+import { faInfo } from '@fortawesome/free-solid-svg-icons/faInfo';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -74,6 +77,9 @@ export const loadIcons = () => {
     faWrench,
     faClipboardList,
     faLocationArrow,
-    faThumbtack
+    faThumbtack,
+    faToolbox,
+    faTools,
+    faInfo
   );
 };
