@@ -35,17 +35,15 @@ const Header = (props: IHeaderProps) => {
     <div id="app-header">
       {renderDevRibbon()}
       <LoadingBar className="loading-bar" />
-      <Navbar data-cy="navbar" light expand="sm" fixed="top" className="bg-light">
+      <Navbar data-cy="navbar" light expand="sm" fixed="top" className="bg-light" >
         <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
         <Brand />
-        <Collapse isOpen={menuOpen} navbar style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Collapse isOpen={menuOpen} navbar style={{justifyContent:"flex-end"}}>
           <Nav>
             <Home />
-            {props.isAuthenticated && <EntitiesMenu />}
+            {props.isAuthenticated && props.isAdmin && <EntitiesMenu />}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
-            <style className="d-flex align-items-end">
-              <AccountMenu isAuthenticated={props.isAuthenticated} />
-            </style>
+            <AccountMenu isAuthenticated={props.isAuthenticated} />
           </Nav>
         </Collapse>
       </Navbar>
