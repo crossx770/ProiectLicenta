@@ -40,6 +40,8 @@ public interface CityService {
      */
     Mono<Long> countAll();
 
+    Flux<CityDTO> findAllWithoutPagination();
+
     /**
      * Get the "id" city.
      *

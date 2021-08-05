@@ -4,6 +4,7 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
 import Settings from './settings/settings';
 import Password from './password/password';
+import Judet from 'app/entities/judet'
 
 const Routes = ({ match }) => (
   <div>

@@ -61,6 +61,11 @@ public class JudetServiceImpl implements JudetService {
         return judetRepository.findAllBy(pageable).map(judetMapper::toDto);
     }
 
+    @Override
+    public Flux<JudetDTO> findAllWithoutPagination() {
+        return judetRepository.findAll().map(judetMapper::toDto);
+    }
+
     public Mono<Long> countAll() {
         return judetRepository.count();
     }

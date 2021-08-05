@@ -1,3 +1,6 @@
+import { IJudet } from 'app/shared/model/judet.model';
+import { ICity } from './city.model';
+
 export interface IUser {
   id?: any;
   login?: string;
@@ -12,6 +15,11 @@ export interface IUser {
   lastModifiedBy?: string;
   lastModifiedDate?: Date | null;
   password?: string;
+  address?: string;
+  phone?: string;
+  infoCompleted?: boolean;
+  judet?: IJudet;
+  city?: ICity;
 }
 
 export const defaultValue: Readonly<IUser> = {
@@ -28,4 +36,10 @@ export const defaultValue: Readonly<IUser> = {
   lastModifiedBy: '',
   lastModifiedDate: null,
   password: '',
+  address: '',
+  phone: '',
+  infoCompleted: false,
+  judet: null,
+  city: null,
+
 };

@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { serializeAxiosError } from './reducer.utils';
 
 import { AppThunk } from 'app/config/store';
+import { IJudet } from '../model/judet.model';
 
 const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
 

@@ -66,6 +66,11 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public Flux<CityDTO> findAllWithoutPagination(){
+        return cityRepository.findAll().map(cityMapper::toDto);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Mono<CityDTO> findOne(Long id) {
         log.debug("Request to get City : {}", id);

@@ -31,6 +31,7 @@ import reactor.core.publisher.Mono;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.reactive.ResponseUtil;
+import reactor.core.publisher.Flux;
 
 /**
  * REST controller for managing {@link licenta.domain.Judet}.
@@ -204,6 +205,20 @@ public class JudetResource {
                             )
                         )
                         .body(countWithEntities.getT2());
+                }
+            );
+    }
+
+
+    @GetMapping("/judets/all")
+    public Mono<ResponseEntity<List<JudetDTO>>> getAllJudets() {
+        log.debug("REST request to get all judets");
+        return judetService
+            .countAll()
+            .zipWith(judetService.findAllWithoutPagination().collectList())
+            .map(
+                list -> {
+                    return ResponseEntity.ok().body(list.getT2());
                 }
             );
     }

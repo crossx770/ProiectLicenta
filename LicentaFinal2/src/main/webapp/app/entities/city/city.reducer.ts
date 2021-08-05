@@ -24,6 +24,16 @@ export const getEntities = createAsyncThunk('city/fetch_entity_list', async ({ p
   return axios.get<ICity[]>(requestUrl);
 });
 
+
+export const getCities= createAsyncThunk(
+  'cities/fetch_all_cities',
+  async () => {
+    const requestUrl = `/api/cities/all`;
+    return axios.get<ICity[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError }
+);
+
 export const getEntity = createAsyncThunk(
   'city/fetch_entity',
   async (id: string | number) => {
@@ -98,13 +108,20 @@ export const CitySlice = createEntitySlice({
           totalItems: parseInt(action.payload.headers['x-total-count'], 10),
         };
       })
+      .addMatcher(isFulfilled(getCities), (state, action) => {
+        return {
+          ...state,
+          loading: false,
+          entities: action.payload.data
+        }
+      })
       .addMatcher(isFulfilled(createEntity, updateEntity, partialUpdateEntity), (state, action) => {
         state.updating = false;
         state.loading = false;
         state.updateSuccess = true;
         state.entity = action.payload.data;
       })
-      .addMatcher(isPending(getEntities, getEntity), state => {
+      .addMatcher(isPending(getEntities, getEntity,getCities), state => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;

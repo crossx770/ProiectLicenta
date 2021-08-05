@@ -7,10 +7,13 @@ import javax.validation.constraints.*;
 import licenta.config.Constants;
 import licenta.domain.Authority;
 import licenta.domain.User;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * A DTO representing a user, with his authorities.
  */
+
 public class AdminUserDTO {
 
     private Long id;
@@ -48,6 +51,30 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    @Size(max=50)
+    private String address;
+
+    @Size(min=10,max=10)
+    private String phone;
+
+    private JudetDTO judet;
+
+    private CityDTO city;
+
+    private boolean infoCompleted;
+
+    private Long cityId;
+
+    private Long judetId;
+
+    public Long getJudetId() {
+        return judetId;
+    }
+
+    public void setJudetId(Long judetId) {
+        this.judetId = judetId;
+    }
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -65,6 +92,11 @@ public class AdminUserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.cityId=user.getCityId();
+        this.address=user.getAddress();
+        this.phone=user.getPhone();
+        this.judetId=user.getJudetId();
+        this.infoCompleted = user.getInfoCompleted();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
 
@@ -102,6 +134,14 @@ public class AdminUserDTO {
 
     public String getEmail() {
         return email;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public void setEmail(String email) {
@@ -172,6 +212,9 @@ public class AdminUserDTO {
         this.authorities = authorities;
     }
 
+    public Boolean getInfoCompleted() {
+        return infoCompleted;
+    }
     // prettier-ignore
     @Override
     public String toString() {
@@ -189,5 +232,45 @@ public class AdminUserDTO {
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
             "}";
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public JudetDTO getJudet() {
+        return judet;
+    }
+
+    public void setJudet(JudetDTO judet) {
+        this.judet = judet;
+    }
+
+    public CityDTO getCity() {
+        return city;
+    }
+
+    public void setCity(CityDTO city) {
+        this.city = city;
+    }
+
+    public boolean isInfoCompleted() {
+        return infoCompleted;
+    }
+
+    public void setInfoCompleted(boolean infoCompleted) {
+        this.infoCompleted = infoCompleted;
     }
 }

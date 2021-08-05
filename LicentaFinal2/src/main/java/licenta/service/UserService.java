@@ -7,13 +7,17 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import licenta.config.Constants;
 import licenta.domain.Authority;
+import licenta.domain.City;
 import licenta.domain.User;
 import licenta.repository.AuthorityRepository;
+import licenta.repository.CityRepository;
 import licenta.repository.UserRepository;
 import licenta.security.AuthoritiesConstants;
 import licenta.security.SecurityUtils;
 import licenta.service.dto.AdminUserDTO;
+import licenta.service.dto.CityDTO;
 import licenta.service.dto.UserDTO;
+import licenta.service.mapper.CityMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -40,10 +44,16 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
+    private final CityRepository cityRepository;
+
+    private final CityMapper cityMapper;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CityRepository cityRepository, CityMapper cityMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.cityRepository = cityRepository;
+        this.cityMapper = cityMapper;
     }
 
     @Transactional
@@ -248,7 +258,8 @@ public class UserService {
      * @return a completed {@link Mono}.
      */
     @Transactional
-    public Mono<Void> updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public Mono<Void> updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, Long cityId,Long judetId,String phone, String address) {
+
         return SecurityUtils
             .getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
@@ -261,6 +272,11 @@ public class UserService {
                     }
                     user.setLangKey(langKey);
                     user.setImageUrl(imageUrl);
+                    user.setCityId(cityId);
+                    user.setJudetId(judetId);
+                    user.setAddress(address);
+                    user.setPhone(phone);
+                    user.setInfoCompleted(true);
                     return saveUser(user);
                 }
             )

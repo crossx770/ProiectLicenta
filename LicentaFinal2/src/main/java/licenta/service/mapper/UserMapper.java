@@ -55,6 +55,12 @@ public class UserMapper {
             user.setLangKey(userDTO.getLangKey());
             Set<Authority> authorities = this.authoritiesFromStrings(userDTO.getAuthorities());
             user.setAuthorities(authorities);
+            user.setAddress(userDTO.getAddress());
+            user.setPhone(userDTO.getPhone());
+            user.setJudetId(userDTO.getJudetId());
+            user.setCityId(userDTO.getCityId());
+            user.setInfoCompleted(userDTO.getInfoCompleted());
+
             return user;
         }
     }

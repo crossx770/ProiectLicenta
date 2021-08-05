@@ -24,6 +24,16 @@ export const getEntities = createAsyncThunk('judet/fetch_entity_list', async ({ 
   return axios.get<IJudet[]>(requestUrl);
 });
 
+
+export const getJudets = createAsyncThunk(
+  'judet/fetch_all_judets',
+  async () => {
+    const requestUrl = `/api/judets/all`;
+    return axios.get<IJudet[]>(requestUrl);
+  },
+  { serializeError: serializeAxiosError }
+);
+
 export const getEntity = createAsyncThunk(
   'judet/fetch_entity',
   async (id: string | number) => {
@@ -98,13 +108,20 @@ export const JudetSlice = createEntitySlice({
           totalItems: parseInt(action.payload.headers['x-total-count'], 10),
         };
       })
+      .addMatcher(isFulfilled(getJudets), (state,action) => {
+        return {
+          ...state,
+          loading : false,
+          entities : action.payload.data,
+        };
+      })
       .addMatcher(isFulfilled(createEntity, updateEntity, partialUpdateEntity), (state, action) => {
         state.updating = false;
         state.loading = false;
         state.updateSuccess = true;
         state.entity = action.payload.data;
       })
-      .addMatcher(isPending(getEntities, getEntity), state => {
+      .addMatcher(isPending(getEntities, getEntity, getJudets), state => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;

@@ -8,6 +8,7 @@ import LoadingBar from 'react-redux-loading-bar';
 import { Home, Brand } from './header-components';
 import { AdminMenu, EntitiesMenu, AccountMenu } from '../menus';
 import { ceil } from 'lodash';
+import { IJudet } from 'app/shared/model/judet.model';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;

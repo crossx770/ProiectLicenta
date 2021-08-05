@@ -208,6 +208,18 @@ public class CityResource {
             );
     }
 
+    @GetMapping("/cities/all")
+    public Mono<ResponseEntity<List<CityDTO>>> getAllCities() {
+        log.debug("REST request to get all judets");
+        return cityService
+            .countAll()
+            .zipWith(cityService.findAllWithoutPagination().collectList())
+            .map(list -> {
+                return ResponseEntity.ok().body(list.getT2());
+            });
+
+    }
+
     /**
      * {@code GET  /cities/:id} : get the "id" city.
      *

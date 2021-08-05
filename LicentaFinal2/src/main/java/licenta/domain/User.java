@@ -10,7 +10,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import licenta.config.Constants;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -21,6 +24,8 @@ import org.springframework.data.relational.core.mapping.Table;
  * A user.
  */
 @Table("jhi_user")
+@Getter
+@Setter
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -78,6 +83,31 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     @Transient
     private Set<Authority> authorities = new HashSet<>();
+
+    @Column("phone")
+    @Size(min = 10, max = 10)
+    private String phone;
+
+    @Column("address")
+    @Size(min = 1, max = 85)
+    private String address;
+
+    @Column("judet_id")
+    private Long judetId;
+
+    @JsonIgnore
+    @Transient
+    private Judet judet;
+
+    @Column("city_id")
+    private Long cityId;
+
+    @JsonIgnore
+    @Transient
+    private City city;
+
+    @Column("info_completed")
+    private Boolean infoCompleted;
 
     public Long getId() {
         return id;
@@ -138,6 +168,62 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public boolean isActivated() {
         return activated;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Long getJudetId() {
+        return judetId;
+    }
+
+    public Judet getJudet() {
+        return judet;
+    }
+
+    public void setJudet(Judet judet) {
+        this.judet = judet;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public Boolean getInfoCompleted() {
+        return infoCompleted;
+    }
+
+    public void setInfoCompleted(Boolean infoCompleted) {
+        this.infoCompleted = infoCompleted;
+    }
+
+    public void setJudetId(Long judetId) {
+        this.judetId = judetId;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public void setActivated(boolean activated) {
@@ -201,7 +287,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "User{" +
@@ -209,10 +294,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
+            ", imageUrl='" + imageUrl + '\'' +
             ", activationKey='" + activationKey + '\'' +
-            "}";
+            ", phone='" + phone + '\'' +
+            ", address='" + address + '\'' +
+            ", infoCompleted=" + infoCompleted +
+            '}';
     }
 }

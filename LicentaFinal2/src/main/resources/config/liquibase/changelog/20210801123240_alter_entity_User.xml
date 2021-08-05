@@ -9,7 +9,7 @@
     <!--
         Added the entity UserDetails.
     -->
-    <changeSet id="20210801123240-1" author="jhipster">
+    <changeSet id="20210801123241-1" author="jhipster">
        <addColumn tableName="jhi_user">
            <column
                name="judet_id"
@@ -25,7 +25,11 @@
            />
            <column
                name="address"
-               type="varchar(50)"
+               type="varchar(85)"
+           />
+           <column
+               name="info_completed"
+               type="bit"
            />
        </addColumn>
     </changeSet>
@@ -40,7 +44,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20210801123240-2" author="jhipster">
+    <changeSet id="20210801123241-2" author="jhipster">
 
         <addForeignKeyConstraint baseColumnNames="judet_id"
                                  baseTableName="jhi_user"

@@ -48,6 +48,7 @@ public interface JudetService {
      */
     Mono<JudetDTO> findOne(Long id);
 
+    Flux<JudetDTO> findAllWithoutPagination();
     /**
      * Delete the "id" judet.
      *
