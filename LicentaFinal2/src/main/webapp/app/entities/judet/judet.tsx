@@ -32,9 +32,6 @@ export const Judet = (props: RouteComponentProps<{ url: string }>) => {
     );
   };
 
-  const getJugets = () => {
-    
-  }
 
   const sortEntities = () => {
     getAllEntities();

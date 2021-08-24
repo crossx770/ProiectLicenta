@@ -1,10 +1,12 @@
 package licenta.service.dto;
 
 import java.io.Serializable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import org.springframework.data.relational.core.mapping.Column;
+import java.util.Objects;
+import javax.validation.constraints.*;
 
+/**
+ * A DTO for the {@link licenta.domain.SubCategory} entity.
+ */
 public class SubCategoryDTO implements Serializable {
 
     private Long id;
@@ -40,7 +42,33 @@ public class SubCategoryDTO implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof SubCategoryDTO)) {
+            return false;
+        }
+
+        SubCategoryDTO subCategoryDTO = (SubCategoryDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, subCategoryDTO.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id);
+    }
+
+    // prettier-ignore
+    @Override
     public String toString() {
-        return "SubcategoryDTO{" + "id=" + id + ", name='" + name + '\'' + ", categoryDTO=" + category + '}';
+        return "SubCategoryDTO{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", category=" + getCategory() +
+            "}";
     }
 }

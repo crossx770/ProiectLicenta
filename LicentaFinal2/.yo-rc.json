@@ -43,7 +43,7 @@
     "devServerPort": 9060,
     "clientPackageManager": "npm",
     "languages": ["en", "fr"],
-    "lastLiquibaseTimestamp": 1627821160000,
-    "entities": ["Judet", "City", "Category", "SubCategory"]
+    "lastLiquibaseTimestamp": 1629821628000,
+    "entities": ["Judet", "City", "Category", "SubCategory", "Post"]
   }
 }

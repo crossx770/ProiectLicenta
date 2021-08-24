@@ -18,6 +18,8 @@ import city from 'app/entities/city/city.reducer';
 import category from 'app/entities/category/category.reducer';
 // prettier-ignore
 import subCategory from 'app/entities/sub-category/sub-category.reducer';
+// prettier-ignore
+import post from 'app/entities/post/post.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -33,6 +35,7 @@ const rootReducer = {
   city,
   category,
   subCategory,
+  post,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
   judet,
