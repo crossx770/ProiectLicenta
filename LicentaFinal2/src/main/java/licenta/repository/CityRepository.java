@@ -24,6 +24,8 @@ public interface CityRepository extends R2dbcRepository<City, Long>, CityReposit
     Flux<City> findAllWhereJudetIsNull();
 
     // just to avoid having unambigous methods
+    @Override
+    Flux<City> findAll();
 
     @Override
     Mono<City> findById(Long id);

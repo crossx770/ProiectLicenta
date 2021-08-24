@@ -1,9 +1,12 @@
 package licenta.service.dto;
 
 import java.io.Serializable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.Objects;
+import javax.validation.constraints.*;
 
+/**
+ * A DTO for the {@link licenta.domain.Category} entity.
+ */
 public class CategoryDTO implements Serializable {
 
     private Long id;
@@ -29,7 +32,32 @@ public class CategoryDTO implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof CategoryDTO)) {
+            return false;
+        }
+
+        CategoryDTO categoryDTO = (CategoryDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, categoryDTO.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id);
+    }
+
+    // prettier-ignore
+    @Override
     public String toString() {
-        return "CategoryDTO{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "CategoryDTO{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            "}";
     }
 }
