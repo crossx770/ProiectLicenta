@@ -175,6 +175,11 @@ class UserSqlHelper {
         columns.add(Column.aliased("activation_key", table, columnPrefix + "_activation_key"));
         columns.add(Column.aliased("reset_key", table, columnPrefix + "_reset_key"));
         columns.add(Column.aliased("reset_date", table, columnPrefix + "_reset_date"));
+        columns.add(Column.aliased("info_completed", table, columnPrefix + "_info_completed"));
+        columns.add(Column.aliased("phone", table, columnPrefix + "_phone"));
+        columns.add(Column.aliased("address", table, columnPrefix + "_address"));
+        columns.add(Column.aliased("judet_id", table, columnPrefix + "_judet_id"));
+        columns.add(Column.aliased("city_id", table, columnPrefix + "_city_id"));
         return columns;
     }
 }

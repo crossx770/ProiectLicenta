@@ -83,6 +83,23 @@ Custom button styles
   }
 }
 
+
+.form-control-new {
+  display: block;
+  width: 100%;
+  height: calc(5em + 1.5rem + 2px);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.5rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
 /* ==========================================================================
 Generic styles
 ========================================================================== */

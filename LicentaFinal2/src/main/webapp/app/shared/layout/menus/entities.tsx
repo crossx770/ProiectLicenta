@@ -6,7 +6,7 @@ import { NavDropdown } from './menu-components';
 const entityMenuItems = (
   <>
     <MenuItem icon="location-arrow" to="/judet">
-      Judets
+      Judet
     </MenuItem>
     <MenuItem icon="thumbtack" to="/city">
       Cities
@@ -16,6 +16,9 @@ const entityMenuItems = (
     </MenuItem>
     <MenuItem icon="tools" to="/sub-category">
       Subcategory
+    </MenuItem>
+    <MenuItem icon="tools" to="/post">
+      Posts
     </MenuItem>
   </>
 );

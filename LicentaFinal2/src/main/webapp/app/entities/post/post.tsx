@@ -43,7 +43,6 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
       ...paginationState,
       activePage: 1,
     });
-    dispatch(getEntities({}));
   };
 
   useEffect(() => {
@@ -71,7 +70,6 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
 
   useEffect(() => {
     if (sorting) {
-      getAllEntities();
       setSorting(false);
     }
   }, [sorting]);

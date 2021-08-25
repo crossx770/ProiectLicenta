@@ -2,6 +2,7 @@ package licenta.service.impl;
 
 import licenta.domain.Post;
 import licenta.repository.PostRepository;
+import licenta.security.SecurityUtils;
 import licenta.service.PostService;
 import licenta.service.dto.PostDTO;
 import licenta.service.mapper.PostMapper;
@@ -40,6 +41,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Mono<PostDTO> partialUpdate(PostDTO postDTO) {
         log.debug("Request to partially update Post : {}", postDTO);
+
 
         return postRepository
             .findById(postDTO.getId())

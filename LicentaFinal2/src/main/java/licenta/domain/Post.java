@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.validation.constraints.*;
+
+import licenta.security.SecurityUtils;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
@@ -34,7 +37,7 @@ public class Post implements Serializable {
     private Boolean is_promoted;
 
     @Column("created_at")
-    private Instant created_at;
+    private Instant created_at = Instant.now();
 
     @NotNull(message = "must not be null")
     @Column("price")

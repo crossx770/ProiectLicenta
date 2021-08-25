@@ -35,7 +35,7 @@ public class UserDTO {
 
     private CityDTO city;
 
-    private boolean infoCompleted;
+    private Boolean infoCompleted;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -125,11 +125,11 @@ public class UserDTO {
         this.city = city;
     }
 
-    public boolean isInfoCompleted() {
+    public Boolean isInfoCompleted() {
         return infoCompleted;
     }
 
-    public void setInfoCompleted(boolean infoCompleted) {
+    public void setInfoCompleted(Boolean infoCompleted) {
         this.infoCompleted = infoCompleted;
     }
 }
