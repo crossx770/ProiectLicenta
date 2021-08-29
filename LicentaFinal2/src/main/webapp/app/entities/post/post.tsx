@@ -43,6 +43,7 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
       ...paginationState,
       activePage: 1,
     });
+    dispatch(getEntities({}))
   };
 
   useEffect(() => {
@@ -70,6 +71,7 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
 
   useEffect(() => {
     if (sorting) {
+      getAllEntities();
       setSorting(false);
     }
   }, [sorting]);
@@ -90,6 +92,7 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
   };
 
   const { match } = props;
+
 
   return (
     <div>
@@ -168,16 +171,10 @@ export const Post = (props: RouteComponentProps<{ url: string }>) => {
                     <td>{post.created_at ? <TextFormat type="date" value={post.created_at} format={APP_DATE_FORMAT} /> : null}</td>
                     <td>{post.price}</td>
                     <td>{post.user_post ? post.user_post.login : ''}</td>
-                    <td>{post.judet_post ? <Link to={`judet/${post.judet_post.id}`}>{post.judet_post.name}</Link> : ''}</td>
-                    <td>{post.city_post ? <Link to={`city/${post.city_post.id}`}>{post.city_post.name}</Link> : ''}</td>
-                    <td>{post.category_post ? <Link to={`category/${post.category_post.id}`}>{post.category_post.name}</Link> : ''}</td>
-                    <td>
-                      {post.subCategory_post ? (
-                        <Link to={`sub-category/${post.subCategory_post.id}`}>{post.subCategory_post.name}</Link>
-                      ) : (
-                        ''
-                      )}
-                    </td>
+                    <td>{post.judet}</td>
+                    <td>{post.city}</td>
+                    <td>{post.category}</td>
+                    <td>{post.subcategory}</td>
                     <td className="text-right">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`${match.url}/${post.id}`} color="info" size="sm" data-cy="entityDetailsButton">

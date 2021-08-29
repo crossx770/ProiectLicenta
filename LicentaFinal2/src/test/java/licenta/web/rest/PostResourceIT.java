@@ -47,6 +47,18 @@ class PostResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_JUDET = "AAAAAAAAAA";
+    private static final String UPDATED_JUDET = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CITY = "AAAAAAAAAA";
+    private static final String UPDATED_CITY = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CATEGORY = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY = "BBBBBBBBBB";
+
+    private static final String DEFAULT_SUBCATEGORY = "AAAAAAAAAA";
+    private static final String UPDATED_SUBCATEGORY = "BBBBBBBBBB";
+
     private static final Boolean DEFAULT_IS_PROMOTED = false;
     private static final Boolean UPDATED_IS_PROMOTED = true;
 
@@ -88,26 +100,12 @@ class PostResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .is_promoted(DEFAULT_IS_PROMOTED)
             .created_at(DEFAULT_CREATED_AT)
-            .price(DEFAULT_PRICE);
+            .price(DEFAULT_PRICE)
+            .city(DEFAULT_CITY)
+            .judet(DEFAULT_JUDET);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
         post.setUser_post(user);
-        // Add required entity
-        Judet judet;
-        judet = em.insert(JudetResourceIT.createEntity(em)).block();
-        post.setJudet_post(judet);
-        // Add required entity
-        City city;
-        city = em.insert(CityResourceIT.createEntity(em)).block();
-        post.setCity_post(city);
-        // Add required entity
-        Category category;
-        category = em.insert(CategoryResourceIT.createEntity(em)).block();
-        post.setCategory_post(category);
-        // Add required entity
-        SubCategory subCategory;
-        subCategory = em.insert(SubCategoryResourceIT.createEntity(em)).block();
-        post.setSubCategory_post(subCategory);
         return post;
     }
 
@@ -123,26 +121,14 @@ class PostResourceIT {
             .description(UPDATED_DESCRIPTION)
             .is_promoted(UPDATED_IS_PROMOTED)
             .created_at(UPDATED_CREATED_AT)
-            .price(UPDATED_PRICE);
+            .price(UPDATED_PRICE)
+            .city(UPDATED_CITY)
+            .judet(UPDATED_JUDET)
+            .category(UPDATED_CATEGORY)
+            .subcategory(UPDATED_SUBCATEGORY);
         // Add required entity
         User user = em.insert(UserResourceIT.createEntity(em)).block();
         post.setUser_post(user);
-        // Add required entity
-        Judet judet;
-        judet = em.insert(JudetResourceIT.createUpdatedEntity(em)).block();
-        post.setJudet_post(judet);
-        // Add required entity
-        City city;
-        city = em.insert(CityResourceIT.createUpdatedEntity(em)).block();
-        post.setCity_post(city);
-        // Add required entity
-        Category category;
-        category = em.insert(CategoryResourceIT.createUpdatedEntity(em)).block();
-        post.setCategory_post(category);
-        // Add required entity
-        SubCategory subCategory;
-        subCategory = em.insert(SubCategoryResourceIT.createUpdatedEntity(em)).block();
-        post.setSubCategory_post(subCategory);
         return post;
     }
 

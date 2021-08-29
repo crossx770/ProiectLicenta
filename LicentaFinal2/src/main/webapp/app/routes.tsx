@@ -14,6 +14,10 @@ import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
+import PostUser from 'app/entities/post/post-user'
+import PostUpdate from './entities/post/post-update';
+import PostDeleteDialog from './entities/post/post-delete-dialog';
+import Post from 'app/entities/post/post'
 
 const Account = Loadable({
   loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
@@ -38,6 +42,10 @@ const Routes = () => {
         <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
         <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
         <ErrorBoundaryRoute path="/" exact component={Home} />
+        <ErrorBoundaryRoute path="/post/user-posts" exact component={PostUser} />
+        <ErrorBoundaryRoute path="/post/user-posts/:id/edit" exact component={PostUpdate} />
+        <ErrorBoundaryRoute exact path={`/post/user-posts/:id/delete`} component={PostDeleteDialog} />
+        <ErrorBoundaryRoute path="/post/new/" exact component ={PostUpdate} />
         <PrivateRoute path="/" component={Entities} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
         <ErrorBoundaryRoute component={PageNotFound} />
       </Switch>

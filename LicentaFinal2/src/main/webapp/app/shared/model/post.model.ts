@@ -13,10 +13,10 @@ export interface IPost {
   created_at?: string | null;
   price?: number;
   user_post?: IUser;
-  judet_post?: IJudet;
-  city_post?: ICity;
-  category_post?: ICategory;
-  subCategory_post?: ISubCategory;
+  judet?: string;
+  city?: string;
+  category?: string;
+  subcategory?: string;
 }
 
 export const defaultValue: Readonly<IPost> = {

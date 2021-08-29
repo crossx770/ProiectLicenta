@@ -17,7 +17,7 @@ const entityMenuItems = (
     <MenuItem icon="tools" to="/sub-category">
       Subcategory
     </MenuItem>
-    <MenuItem icon="tools" to="/post">
+    <MenuItem icon="clipboard-list" to="/post">
       Posts
     </MenuItem>
   </>

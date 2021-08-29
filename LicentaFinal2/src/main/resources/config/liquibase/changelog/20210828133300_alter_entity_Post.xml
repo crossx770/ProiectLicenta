@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Post.
+    -->
+    <changeSet id="20210828133300-1" author="bobo">
+
+        <dropForeignKeyConstraint
+                                 baseTableName="post"
+                                 constraintName="fk_post__judet_post_id" />
+
+
+        <dropForeignKeyConstraint
+                                 baseTableName="post"
+                                 constraintName="fk_post__city_post_id" />
+
+
+        <dropColumn tableName="post"
+                    columnName="judet_post_id" />
+
+        <dropColumn tableName="post"
+                    columnName="city_post_id" />
+
+        <addColumn tableName="post">
+            <column name="judet" type="varchar(50)"/>
+            <column name="city" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20210828133300-2" author="bobo">
+
+        <dropForeignKeyConstraint
+            baseTableName="post"
+            constraintName="fk_post__category_post_id" />
+
+
+        <dropForeignKeyConstraint
+            baseTableName="post"
+            constraintName="fk_post__sub_category_post_id" />
+
+
+        <dropColumn tableName="post"
+                    columnName="category_post_id" />
+
+        <dropColumn tableName="post"
+                    columnName="sub_category_post_id" />
+
+        <addColumn tableName="post">
+            <column name="category" type="varchar(100)"/>
+            <column name="subcategory" type="varchar(100)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

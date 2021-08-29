@@ -63,6 +63,21 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllBy(pageable).map(postMapper::toDto);
     }
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public Flux<PostDTO> findAllWithUser(Pageable pageable, String user) {
+        log.debug("Request to get all Posts");
+        return postRepository.findAllByUser(pageable,user).map(postMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Flux<PostDTO> findAllWithFilter(String judet, String city, String category, String subcategory, Pageable pageable) {
+        log.debug("Request to get all Posts with filtering");
+        return postRepository.findAllByCriteria(judet,city,category,subcategory,pageable).map(postMapper::toDto);
+    }
+
     public Mono<Long> countAll() {
         return postRepository.count();
     }

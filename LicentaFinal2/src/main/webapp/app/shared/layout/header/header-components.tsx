@@ -22,9 +22,11 @@ export const Brand = props => (
 
 export const Home = props => (
   <NavItem>
-    <NavLink tag={Link} to="/" className="d-flex align-items-center">
-      <FontAwesomeIcon icon="home" />
-      <span>Home</span>
-    </NavLink>
+    <a href="http://localhost:9000/"> 
+      <NavLink className="d-flex align-items-center">
+        <FontAwesomeIcon icon="home" />
+        Home
+      </NavLink>
+     </a>
   </NavItem>
 );

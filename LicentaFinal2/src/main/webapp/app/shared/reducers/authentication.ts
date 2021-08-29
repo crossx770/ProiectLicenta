@@ -30,7 +30,7 @@ export const getSession = (): AppThunk => (dispatch, getState) => {
   dispatch(getAccount());
 };
 
-export const getAccount = createAsyncThunk('authentication/get_account', async () => axios.get<any>('api/account'), {
+export const getAccount = createAsyncThunk('authentication/get_account', async () => axios.get<any>('api/account',{headers:{Authentication:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTYzMDE2OTI3Nn0.R3qxpc-Y73SEBR9h1Cb1-mnuS21wOqD-5ZHyBoHkv0cN1MykaOj8J2xfSNtgjZWPR8hk6vUcxVtwvXe1ZKC18Q"}}), {
   serializeError: serializeAxiosError,
 });
 

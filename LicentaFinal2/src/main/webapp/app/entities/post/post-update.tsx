@@ -12,9 +12,7 @@ import { getEntities as getJudets } from 'app/entities/judet/judet.reducer';
 import { ICity } from 'app/shared/model/city.model';
 import { getEntities as getCities } from 'app/entities/city/city.reducer';
 import { ICategory } from 'app/shared/model/category.model';
-import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { ISubCategory } from 'app/shared/model/sub-category.model';
-import { getEntities as getSubCategories } from 'app/entities/sub-category/sub-category.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './post.reducer';
 import { IPost } from 'app/shared/model/post.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -22,36 +20,50 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { height } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { now } from 'lodash';
+import {judet,category, AUTHORITIES } from 'app/config/constants';
 import moment from "moment";
+import { AccountMenu } from 'app/shared/layout/menus';
 
 export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const judets = useAppSelector(state => state.judet.entities);
-  const cities = useAppSelector(state => state.city.entities);
-  const categories = useAppSelector(state => state.category.entities);
-  const subCategories = useAppSelector(state => state.subCategory.entities);
   const postEntity = useAppSelector(state => state.post.entity);
   const loading = useAppSelector(state => state.post.loading);
   const updating = useAppSelector(state => state.post.updating);
   const updateSuccess = useAppSelector(state => state.post.updateSuccess);
   const user = useAppSelector(state => state.authentication.account);
 
+  var judetInitial = useAppSelector(state => state.post.entity.judet);
+  var categoryInitial = useAppSelector(state => state.post.entity.category);
+  const prev = props.location.state;
+  const [judetTemp,setJudetTemp] = useState('');
+  const [categoryTemp,setCategoryTemp] = useState('');
+
   const handleClose = () => {
-    props.history.push('/post');
+    if(prev) {
+      props.history.push(prev["prevPath"]);
+    }
+    else {
+      props.history.push('/');
+    }
   };
+
+  const back =() => {
+    if(prev) {
+      props.history.push(prev["prevPath"]);
+    }
+    else {
+      props.history.push('/');
+    }
+  }
 
   useEffect(() => {
     if (!isNew) {
       dispatch(getEntity(props.match.params.id));
     }
     dispatch(getAccount());
-    dispatch(getJudets({}));
-    dispatch(getCities({}));
-    dispatch(getCategories({}));
-    dispatch(getSubCategories({}));
   }, []);
 
   useEffect(() => {
@@ -61,16 +73,11 @@ export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
-    values.created_at = convertDateTimeToServer(values.created_at);
-
+    
     const entity = {
       ...postEntity,
       ...values,
-      user_post: user, 
-      judet_post: judets.find(it => it.id.toString() === values.judet_postId.toString()),
-      city_post: cities.find(it => it.id.toString() === values.city_postId.toString()),
-      category_post: categories.find(it => it.id.toString() === values.category_postId.toString()),
-      subCategory_post: subCategories.find(it => it.id.toString() === values.subCategory_postId.toString()),
+      user_post: user
     };
 
     if (isNew) {
@@ -81,18 +88,20 @@ export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
   };
 
   const defaultValues = () =>
-    isNew
+    !isNew
       ? {
-          created_at: displayDefaultDateTime(),
-        }
-      : {
           ...postEntity,
-          created_at: convertDateTimeFromServer(moment().format("YYYY-MM-DD HH:mm:ss")),
-          judet_postId: postEntity?.judet_post?.id,
-          city_postId: postEntity?.city_post?.id,
-          category_postId: postEntity?.category_post?.id,
-          subCategory_postId: postEntity?.subCategory_post?.id,
-        };
+        }
+        : stop;
+
+  const handleChangeJudet = (e) => {
+    setJudetTemp( e.target.value);
+  }
+
+  const handleChangeCategory = (e) => {
+    setCategoryTemp(e.target.value);
+  }
+
 
   return (
     <div>
@@ -143,61 +152,70 @@ export const PostUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate: v => isNumber(v) || 'This field should be a number.',
                 }}
               />
-              <ValidatedField id="post-judet_post" name="judet_postId" data-cy="judet_post" label="Judet Post" type="select" required>
-                <option value="" key="0" />
-                {judets
-                  ? judets.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.name}
-                      </option>
-                    ))
-                  : null}
+              <ValidatedField id="post-judet" name="judet" data-cy="judet" label="Judet Post" type="select" required onChange={handleChangeJudet}>
+                <option key="0"> </option>
+                {judet.map((judet1, index) => {
+              return <option key={judet1.id}>{judet1.name}</option>
+            })}
               </ValidatedField>
-              <ValidatedField id="post-city_post" name="city_postId" data-cy="city_post" label="City Post" type="select" required>
-                <option value="" key="0" />
-                {cities
-                  ? cities.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.name}
-                      </option>
-                    ))
-                  : null}
+              <ValidatedField id="post-city" name="city" data-cy="city" label="City Post" type="select" required>
+                <option key="0"> </option>
+                {judet.map((judet1, index) => {
+                if(judetTemp == '') {
+                  if(judet1.name == judetInitial){
+                      return judet1.city.map((city, index2) => {
+                          return <option key={city.id}>{city.name}</option>
+                      })
+                    }
+                } else {
+                  if(judet1.name == judetTemp){
+                    return judet1.city.map((city, index2) => {
+                        return <option key={city.id}>{city.name}</option>
+                    })
+                  }
+                }
+                })}
               </ValidatedField>
               <ValidatedField
-                id="post-category_post"
-                name="category_postId"
-                data-cy="category_post"
+                id="post-category"
+                name="category"
+                data-cy="category"
                 label="Category Post"
                 type="select"
+                onChange={handleChangeCategory}
                 required
               >
-                <option value="" key="0" />
-                {categories
-                  ? categories.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.name}
-                      </option>
-                    ))
-                  : null}
+                <option key="0"> </option>
+                {category.map((cat, index) => {
+              return <option key={cat.id}>{cat.name}</option>
+            })}
               </ValidatedField>
               <ValidatedField
-                id="post-subCategory_post"
-                name="subCategory_postId"
-                data-cy="subCategory_post"
-                label="Sub Category Post"
+                id="post-subcategory"
+                name="subcategory"
+                data-cy="subcategory"
+                label="Subcategory Post"
                 type="select"
                 required
               >
-                <option value="" key="0" />
-                {subCategories
-                  ? subCategories.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.name}
-                      </option>
-                    ))
-                  : null}
+                <option key="0"> </option>
+                {category.map((cat, index) => {
+                if(categoryTemp == '') {
+                  if(cat.name == categoryInitial){
+                      return cat.subcategory.map((subcat, index2) => {
+                          return <option key={subcat.id}>{subcat.name}</option>
+                      })
+                    }
+                } else {
+                  if(cat.name == categoryTemp){
+                    return cat.subcategory.map((subcat, index2) => {
+                        return <option key={subcat.id}>{subcat.name}</option>
+                    })
+                  }
+                }
+                })}
               </ValidatedField>
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/post" replace color="info">
+              <Button id="cancel-save" data-cy="entityCreateCancelButton" onClick={back} replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">Back</span>

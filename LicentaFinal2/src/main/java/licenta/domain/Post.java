@@ -49,31 +49,19 @@ public class Post implements Serializable {
     @Column("user_post_id")
     private Long user_postId;
 
-    @Transient
-    private Judet judet_post;
 
-    @Column("judet_post_id")
-    private Long judet_postId;
+    @Column("judet")
+    private String judet;
 
-    @JsonIgnoreProperties(value = { "judet" }, allowSetters = true)
-    @Transient
-    private City city_post;
+    @Column("city")
+    private String city;
 
-    @Column("city_post_id")
-    private Long city_postId;
 
-    @Transient
-    private Category category_post;
+    @Column("category")
+    private String category;
 
-    @Column("category_post_id")
-    private Long category_postId;
-
-    @JsonIgnoreProperties(value = { "category" }, allowSetters = true)
-    @Transient
-    private SubCategory subCategory_post;
-
-    @Column("sub_category_post_id")
-    private Long subCategory_postId;
+    @Column("subcategory")
+    private String subcategory;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -169,6 +157,31 @@ public class Post implements Serializable {
         this.user_postId = user != null ? user.getId() : null;
     }
 
+    public String getJudet() {
+        return judet;
+    }
+    public Post judet(String judet) {
+        this.judet = judet;
+        return this;
+    }
+
+    public void setJudet(String judet) {
+        this.judet = judet;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Post city(String city) {
+        this.city = city;
+        return this;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public Long getUser_postId() {
         return this.user_postId;
     }
@@ -177,96 +190,30 @@ public class Post implements Serializable {
         this.user_postId = user;
     }
 
-    public Judet getJudet_post() {
-        return this.judet_post;
+    public String getCategory() {
+        return category;
     }
 
-    public Post judet_post(Judet judet) {
-        this.setJudet_post(judet);
-        this.judet_postId = judet != null ? judet.getId() : null;
+    public Post category(String category) {
+        this.category=category;
         return this;
     }
 
-    public void setJudet_post(Judet judet) {
-        this.judet_post = judet;
-        this.judet_postId = judet != null ? judet.getId() : null;
-    }
-
-    public Long getJudet_postId() {
-        return this.judet_postId;
-    }
-
-    public void setJudet_postId(Long judet) {
-        this.judet_postId = judet;
-    }
-
-    public City getCity_post() {
-        return this.city_post;
-    }
-
-    public Post city_post(City city) {
-        this.setCity_post(city);
-        this.city_postId = city != null ? city.getId() : null;
+    public Post subcategory(String subcategory) {
+        this.subcategory=subcategory;
         return this;
     }
 
-    public void setCity_post(City city) {
-        this.city_post = city;
-        this.city_postId = city != null ? city.getId() : null;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Long getCity_postId() {
-        return this.city_postId;
+    public String getSubcategory() {
+        return subcategory;
     }
 
-    public void setCity_postId(Long city) {
-        this.city_postId = city;
-    }
-
-    public Category getCategory_post() {
-        return this.category_post;
-    }
-
-    public Post category_post(Category category) {
-        this.setCategory_post(category);
-        this.category_postId = category != null ? category.getId() : null;
-        return this;
-    }
-
-    public void setCategory_post(Category category) {
-        this.category_post = category;
-        this.category_postId = category != null ? category.getId() : null;
-    }
-
-    public Long getCategory_postId() {
-        return this.category_postId;
-    }
-
-    public void setCategory_postId(Long category) {
-        this.category_postId = category;
-    }
-
-    public SubCategory getSubCategory_post() {
-        return this.subCategory_post;
-    }
-
-    public Post subCategory_post(SubCategory subCategory) {
-        this.setSubCategory_post(subCategory);
-        this.subCategory_postId = subCategory != null ? subCategory.getId() : null;
-        return this;
-    }
-
-    public void setSubCategory_post(SubCategory subCategory) {
-        this.subCategory_post = subCategory;
-        this.subCategory_postId = subCategory != null ? subCategory.getId() : null;
-    }
-
-    public Long getSubCategory_postId() {
-        return this.subCategory_postId;
-    }
-
-    public void setSubCategory_postId(Long subCategory) {
-        this.subCategory_postId = subCategory;
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

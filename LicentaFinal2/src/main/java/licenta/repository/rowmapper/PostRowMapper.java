@@ -33,10 +33,10 @@ public class PostRowMapper implements BiFunction<Row, String, Post> {
         entity.setCreated_at(converter.fromRow(row, prefix + "_created_at", Instant.class));
         entity.setPrice(converter.fromRow(row, prefix + "_price", Float.class));
         entity.setUser_postId(converter.fromRow(row, prefix + "_user_post_id", Long.class));
-        entity.setJudet_postId(converter.fromRow(row, prefix + "_judet_post_id", Long.class));
-        entity.setCity_postId(converter.fromRow(row, prefix + "_city_post_id", Long.class));
-        entity.setCategory_postId(converter.fromRow(row, prefix + "_category_post_id", Long.class));
-        entity.setSubCategory_postId(converter.fromRow(row, prefix + "_sub_category_post_id", Long.class));
+        entity.setJudet(converter.fromRow(row, prefix + "_judet", String.class));
+        entity.setCity(converter.fromRow(row, prefix + "_city", String.class));
+        entity.setCategory(converter.fromRow(row, prefix + "_category", String.class));
+        entity.setSubcategory(converter.fromRow(row, prefix + "_subcategory", String.class));
         return entity;
     }
 }

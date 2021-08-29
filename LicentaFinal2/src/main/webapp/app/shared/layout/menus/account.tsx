@@ -11,8 +11,8 @@ const accountMenuItemsAuthenticated = (
     <MenuItem icon="lock" to="/account/password" data-cy="passwordItem">
       Password
     </MenuItem>
-    <MenuItem icon="clipboard-list" to="/orders" data-cy="">
-      Orders
+    <MenuItem icon="clipboard-list" to="/post/user-posts" data-cy="userPosts">
+      Your Posts
     </MenuItem>
     <MenuItem icon="sign-out-alt" to="/logout" data-cy="logout">
       Sign out

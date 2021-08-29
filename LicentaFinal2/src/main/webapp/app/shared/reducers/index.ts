@@ -15,10 +15,6 @@ import judet from 'app/entities/judet/judet.reducer';
 // prettier-ignore
 import city from 'app/entities/city/city.reducer';
 // prettier-ignore
-import category from 'app/entities/category/category.reducer';
-// prettier-ignore
-import subCategory from 'app/entities/sub-category/sub-category.reducer';
-// prettier-ignore
 import post from 'app/entities/post/post.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
@@ -33,8 +29,6 @@ const rootReducer = {
   password,
   settings,
   city,
-  category,
-  subCategory,
   post,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,

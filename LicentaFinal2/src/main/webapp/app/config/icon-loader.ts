@@ -37,6 +37,7 @@ import { faThumbtack } from '@fortawesome/free-solid-svg-icons/faThumbtack';
 import { faToolbox } from '@fortawesome/free-solid-svg-icons/faToolbox';
 import { faTools } from '@fortawesome/free-solid-svg-icons/faTools';
 import { faInfo } from '@fortawesome/free-solid-svg-icons/faInfo';
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -80,6 +81,7 @@ export const loadIcons = () => {
     faThumbtack,
     faToolbox,
     faTools,
-    faInfo
+    faInfo,
+    faEdit
   );
 };

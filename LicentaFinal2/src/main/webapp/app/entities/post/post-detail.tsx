@@ -48,13 +48,13 @@ export const PostDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dt>User Post</dt>
           <dd>{postEntity.user_post ? postEntity.user_post.login : ''}</dd>
           <dt>Judet Post</dt>
-          <dd>{postEntity.judet_post ? postEntity.judet_post.name : ''}</dd>
+          <dd>{postEntity.judet}</dd>
           <dt>City Post</dt>
-          <dd>{postEntity.city_post ? postEntity.city_post.name : ''}</dd>
+          <dd>{postEntity.city}</dd>
           <dt>Category Post</dt>
-          <dd>{postEntity.category_post ? postEntity.category_post.name : ''}</dd>
+          <dd>{postEntity.category}</dd>
           <dt>Sub Category Post</dt>
-          <dd>{postEntity.subCategory_post ? postEntity.subCategory_post.name : ''}</dd>
+          <dd>{postEntity.subcategory}</dd>
         </dl>
         <Button tag={Link} to="/post" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

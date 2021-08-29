@@ -1,6 +1,7 @@
 package licenta.service;
 
 import licenta.service.dto.PostDTO;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -32,6 +33,10 @@ public interface PostService {
      * @return the list of entities.
      */
     Flux<PostDTO> findAll(Pageable pageable);
+
+    Flux<PostDTO> findAllWithUser(Pageable pageable, String user);
+
+    Flux<PostDTO> findAllWithFilter(String judet, String city, String category, String subcategory, Pageable pageable);
 
     /**
      * Returns the number of posts available.

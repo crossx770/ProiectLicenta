@@ -29,13 +29,13 @@ public class PostDTO implements Serializable {
 
     private UserDTO user_post;
 
-    private JudetDTO judet_post;
+    private String judet;
 
-    private CityDTO city_post;
+    private String city;
 
-    private CategoryDTO category_post;
+    private String category;
 
-    private SubCategoryDTO subCategory_post;
+    private String subcategory;
 
     public Long getId() {
         return id;
@@ -93,36 +93,36 @@ public class PostDTO implements Serializable {
         this.user_post = user_post;
     }
 
-    public JudetDTO getJudet_post() {
-        return judet_post;
+    public String getJudet() {
+        return judet;
     }
 
-    public void setJudet_post(JudetDTO judet_post) {
-        this.judet_post = judet_post;
+    public void setJudet(String judet) {
+        this.judet = judet;
     }
 
-    public CityDTO getCity_post() {
-        return city_post;
+    public String getCity() {
+        return city;
     }
 
-    public void setCity_post(CityDTO city_post) {
-        this.city_post = city_post;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public CategoryDTO getCategory_post() {
-        return category_post;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategory_post(CategoryDTO category_post) {
-        this.category_post = category_post;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public SubCategoryDTO getSubCategory_post() {
-        return subCategory_post;
+    public String getSubcategory() {
+        return subcategory;
     }
 
-    public void setSubCategory_post(SubCategoryDTO subCategory_post) {
-        this.subCategory_post = subCategory_post;
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
     }
 
     @Override
@@ -157,10 +157,10 @@ public class PostDTO implements Serializable {
             ", created_at='" + getCreated_at() + "'" +
             ", price=" + getPrice() +
             ", user_post=" + getUser_post() +
-            ", judet_post=" + getJudet_post() +
-            ", city_post=" + getCity_post() +
-            ", category_post=" + getCategory_post() +
-            ", subCategory_post=" + getSubCategory_post() +
+            ", judet=" + getJudet() +
+            ", city=" + getCity() +
+            ", category=" + getCategory() +
+            ", subcategory=" + getSubcategory() +
             "}";
     }
 }

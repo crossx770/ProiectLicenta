@@ -17,35 +17,18 @@ import reactor.core.publisher.Mono;
 public interface PostRepository extends R2dbcRepository<Post, Long>, PostRepositoryInternal {
     Flux<Post> findAllBy(Pageable pageable);
 
+
+    @Query("SELECT * FROM post entity WHERE entity.judet = :judet AND entity.city = :city AND entity.category = :category AND entity.subcategory = :subcategory")
+    Flux<Post> findAllByCriteria(String judet, String city, String category, String subcategory, Pageable pageable);
+
+    @Query("SELECT * FROM post entity LEFT JOIN jhi_user u ON u.id = entity.user_post_id WHERE u.login = :user")
+    Flux<Post> findAllByUser(Pageable pageable, String user);
+
     @Query("SELECT * FROM post entity WHERE entity.user_post_id = :id")
     Flux<Post> findByUser_post(Long id);
 
     @Query("SELECT * FROM post entity WHERE entity.user_post_id IS NULL")
     Flux<Post> findAllWhereUser_postIsNull();
-
-    @Query("SELECT * FROM post entity WHERE entity.judet_post_id = :id")
-    Flux<Post> findByJudet_post(Long id);
-
-    @Query("SELECT * FROM post entity WHERE entity.judet_post_id IS NULL")
-    Flux<Post> findAllWhereJudet_postIsNull();
-
-    @Query("SELECT * FROM post entity WHERE entity.city_post_id = :id")
-    Flux<Post> findByCity_post(Long id);
-
-    @Query("SELECT * FROM post entity WHERE entity.city_post_id IS NULL")
-    Flux<Post> findAllWhereCity_postIsNull();
-
-    @Query("SELECT * FROM post entity WHERE entity.category_post_id = :id")
-    Flux<Post> findByCategory_post(Long id);
-
-    @Query("SELECT * FROM post entity WHERE entity.category_post_id IS NULL")
-    Flux<Post> findAllWhereCategory_postIsNull();
-
-    @Query("SELECT * FROM post entity WHERE entity.sub_category_post_id = :id")
-    Flux<Post> findBySubCategory_post(Long id);
-
-    @Query("SELECT * FROM post entity WHERE entity.sub_category_post_id IS NULL")
-    Flux<Post> findAllWhereSubCategory_postIsNull();
 
     // just to avoid having unambigous methods
     @Override

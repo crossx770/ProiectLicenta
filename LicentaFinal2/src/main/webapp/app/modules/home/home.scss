@@ -8,3 +8,20 @@ Main page styles
   background: url('../../../content/images/jhipster_family_member_0.svg') no-repeat center top;
   background-size: contain;
 }
+
+
+.color {
+  color:#b4b4b4
+}
+
+.td {
+  display:table-cell;
+  color: #f2f4f5;
+  border-bottom: 24px !important;
+  background-color: azure;
+}
+.tr {
+  display:table-row;
+  border-bottom: 24px !important;
+}
+

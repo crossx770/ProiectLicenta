@@ -5,6 +5,7 @@ import { loadMoreDataWhenScrolled, parseHeaderForLinks } from 'react-jhipster';
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from 'app/shared/reducers/reducer.utils';
 import { IPost, defaultValue } from 'app/shared/model/post.model';
+import { IPostFilter } from 'app/shared/model/postFilter.model';
 
 const initialState: EntityState<IPost> = {
   loading: false,
@@ -22,7 +23,22 @@ const apiUrl = 'api/posts';
 // Actions
 
 export const getEntities = createAsyncThunk('post/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}`;
+  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
+  return axios.get<IPost[]>(requestUrl);
+});
+
+export const getEntitiesForUser = createAsyncThunk('post/fetch_entity_list', async ({ page, size, sort, query }: IQueryParams) => {
+  const requestUrl = `${apiUrl}/user/${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
+  return axios.get<IPost[]>(requestUrl);
+});
+
+export const getEntitiesHome = createAsyncThunk('post/fetch_entity_list', async ({page, size, sort }: IQueryParams) => {
+  const requestUrl = `${apiUrl}/home/${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
+  return axios.get<IPost[]>(requestUrl);
+});
+
+export const getEntitiesHomeWithFilter = createAsyncThunk('post/fetch_entity_list', async ({ page, size, sort,query }: IQueryParams ) => {
+  const requestUrl = `${apiUrl}/home${sort ? `?page=${page}&size=${size}&sort=${sort}&query=${query}&` : '?'}cacheBuster=${new Date().getTime()}`;
   return axios.get<IPost[]>(requestUrl);
 });
 
@@ -42,6 +58,16 @@ export const createEntity = createAsyncThunk(
   },
   { serializeError: serializeAxiosError }
 );
+
+export const getAllPostsFilter = createAsyncThunk(
+  'post/get_all_posts_with_filter',
+  async (params: IPostFilter,thunkAPI) => {
+    const requestUrl = `${apiUrl}/home${params.sort ? `?page=${params.page}&size=${params.size}&sort=${params.sort}&judet=${params.judet}&city=${params.city}&category=${params.category}&subcategory=${params.subcategory}&` : '?'}cacheBuster=${new Date().getTime()}`;
+    
+    return axios.post<IPost>(requestUrl,params);
+  },
+  { serializeError: serializeAxiosError }
+)
 
 export const updateEntity = createAsyncThunk(
   'post/update_entity',
@@ -84,7 +110,7 @@ export const PostSlice = createEntitySlice({
         state.updateSuccess = true;
         state.entity = {};
       })
-      .addMatcher(isFulfilled(getEntities), (state, action) => {
+      .addMatcher(isFulfilled(getEntities,getEntitiesHomeWithFilter,getEntitiesHome,getAllPostsFilter,getEntitiesForUser ), (state, action) => {
         const links = parseHeaderForLinks(action.payload.headers.link);
 
         return {
@@ -101,7 +127,7 @@ export const PostSlice = createEntitySlice({
         state.updateSuccess = true;
         state.entity = action.payload.data;
       })
-      .addMatcher(isPending(getEntities, getEntity), state => {
+      .addMatcher(isPending(getEntities, getEntity,getEntitiesHomeWithFilter,getEntitiesHome,getAllPostsFilter,getEntitiesForUser ), state => {
         state.errorMessage = null;
         state.updateSuccess = false;
         state.loading = true;

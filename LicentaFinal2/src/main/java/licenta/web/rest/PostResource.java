@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import licenta.repository.PostRepository;
+import licenta.security.SecurityUtils;
 import licenta.service.PostService;
 import licenta.service.dto.PostDTO;
 import licenta.web.rest.errors.BadRequestAlertException;
@@ -207,6 +208,80 @@ public class PostResource {
                 }
             );
     }
+
+    @GetMapping("/posts/home")
+    public Mono<ResponseEntity<List<PostDTO>>> getAllPostsHome(Pageable pageable, ServerHttpRequest request) {
+        log.debug("REST request to get a page of Posts");
+        return postService
+            .countAll()
+            .zipWith(postService.findAll(pageable).collectList())
+            .map(
+                countWithEntities -> {
+                    return ResponseEntity
+                        .ok()
+                        .headers(
+                            PaginationUtil.generatePaginationHttpHeaders(
+                                UriComponentsBuilder.fromHttpRequest(request),
+                                new PageImpl<>(countWithEntities.getT2(), pageable, countWithEntities.getT1())
+                            )
+                        )
+                        .body(countWithEntities.getT2());
+                }
+            );
+    }
+
+
+    @GetMapping("/posts/user")
+    public Mono<ResponseEntity<List<PostDTO>>> getAllPostsUser(Pageable pageable, ServerHttpRequest request) {
+        log.debug("REST request to get a page of Posts");
+
+        return
+            SecurityUtils.getCurrentUserLogin().flatMap(user->postService
+            .countAll()
+            .zipWith(postService.findAllWithUser(pageable,user).collectList())
+            .map(
+                countWithEntities -> {
+                    return ResponseEntity
+                        .ok()
+                        .headers(
+                            PaginationUtil.generatePaginationHttpHeaders(
+                                UriComponentsBuilder.fromHttpRequest(request),
+                                new PageImpl<>(countWithEntities.getT2(), pageable, countWithEntities.getT1())
+                            )
+                        )
+                        .body(countWithEntities.getT2());
+                }
+            ));
+    }
+
+
+
+    @PostMapping("/posts/home")
+    public Mono<ResponseEntity<List<PostDTO>>> getAllPostsHomeFiltered(@RequestParam(value="judet") String judet,
+                                                                       @RequestParam(value="city") String city,
+                                                                       @RequestParam(value="category") String category,
+                                                                       @RequestParam(value="subcategory") String subcategory,
+                                                                       Pageable pageable,
+                                                                       ServerHttpRequest request) {
+        log.debug("REST request to get a page of Posts");
+        return postService
+            .countAll()
+            .zipWith(postService.findAllWithFilter(judet,city,category,subcategory,pageable).collectList())
+            .map(
+                countWithEntities -> {
+                    return ResponseEntity
+                        .ok()
+                        .headers(
+                            PaginationUtil.generatePaginationHttpHeaders(
+                                UriComponentsBuilder.fromHttpRequest(request),
+                                new PageImpl<>(countWithEntities.getT2(), pageable, countWithEntities.getT1())
+                            )
+                        )
+                        .body(countWithEntities.getT2());
+                }
+            );
+    }
+
 
     /**
      * {@code GET  /posts/:id} : get the "id" post.
