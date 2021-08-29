@@ -2,6 +2,7 @@ package licenta.service.impl;
 
 import licenta.domain.Post;
 import licenta.repository.PostRepository;
+import licenta.repository.UserRepository;
 import licenta.security.SecurityUtils;
 import licenta.service.PostService;
 import licenta.service.dto.PostDTO;
@@ -27,9 +28,12 @@ public class PostServiceImpl implements PostService {
 
     private final PostMapper postMapper;
 
-    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
+    private final UserRepository userRepository;
+
+    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -68,7 +72,10 @@ public class PostServiceImpl implements PostService {
     @Transactional(readOnly = true)
     public Flux<PostDTO> findAllWithUser(Pageable pageable, String user) {
         log.debug("Request to get all Posts");
-        return postRepository.findAllByUser(pageable,user).map(postMapper::toDto);
+        return postRepository.findAllByUser(pageable,user).flatMap(p ->
+            Mono.just(p)
+                .zipWith(userRepository.findById(p.getUser_postId()))
+                .map(tuple-> tuple.getT1().user_post(tuple.getT2()))).map(postMapper::toDto);
     }
 
     @Override

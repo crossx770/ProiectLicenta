@@ -142,8 +142,8 @@ public class AccountResource {
                         userDTO.getEmail(),
                         userDTO.getLangKey(),
                         userDTO.getImageUrl(),
-                        userDTO.getCityId(),
-                        userDTO.getJudetId(),
+                        userDTO.getCity(),
+                        userDTO.getJudet(),
                         userDTO.getPhone(),
                         userDTO.getAddress()
                     )

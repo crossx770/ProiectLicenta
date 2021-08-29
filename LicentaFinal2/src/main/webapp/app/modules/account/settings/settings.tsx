@@ -1,4 +1,4 @@
-import React, { useEffect  } from 'react';
+import React, { useEffect, useState  } from 'react';
 import { Button, Col, Row } from 'reactstrap';
 import { ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
 import { toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import { getSession } from 'app/shared/reducers/authentication';
 import { getJudets } from 'app/entities/judet/judet.reducer';
 import { saveAccountSettings, reset } from './settings.reducer';
 import { getCities } from 'app/entities/city/city.reducer';
-import { values } from 'lodash';
+import { judet } from 'app/config/constants';
 
 
 export const SettingsPage = (props: RouteComponentProps<{id: string }>) => {
@@ -22,12 +22,14 @@ export const SettingsPage = (props: RouteComponentProps<{id: string }>) => {
 
   //const judetsDispatch = dispatch(getJudets())
 
-
-  const judets =useAppSelector(state => state.judet.entities);
-  const cities = useAppSelector (state => state.city.entities);
   const account = useAppSelector(state => state.authentication.account);
   const successMessage = useAppSelector(state => state.settings.successMessage);
   
+
+
+  var judetInitial = useAppSelector(state => state.authentication.account.judet);
+  const prev = props.location.state;
+  const [judetTemp,setJudetTemp] = useState('');
 
 
   const handleClose = () => {
@@ -36,8 +38,6 @@ export const SettingsPage = (props: RouteComponentProps<{id: string }>) => {
 
   useEffect(() => {
     dispatch(getSession());
-    dispatch(getCities());
-    dispatch(getJudets());
     return () => {
       dispatch(reset());
     };
@@ -65,15 +65,19 @@ export const SettingsPage = (props: RouteComponentProps<{id: string }>) => {
     ? {}
     : {
         ...account,
-        cityId: account?.cityId,
       };  
 
 
-    const validatePhoneNumber = (input_str) =>  {
-          var re = /^(07)[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3}$/;
-      
-          return re.test(input_str);
-      }
+  const validatePhoneNumber = (input_str) =>  {
+        var re = /^(07)[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3}$/;
+    
+        return re.test(input_str);
+    }
+
+
+  const handleChangeJudet = (e) => {
+    setJudetTemp( e.target.value);
+  }
 
   return (
     <div>
@@ -133,27 +137,30 @@ export const SettingsPage = (props: RouteComponentProps<{id: string }>) => {
               data-cy="email"
             />
            
-            <ValidatedField id="settings-judet" name="judetId" data-cy="judet" label="Judet"  type="select" required>
-            <option value="" key="0"/>
-              {judets
-                ? judets.map(otherEntity=> 
-                    <option value={otherEntity.id}  key={otherEntity.id} >
-                      {otherEntity.name}
-                    </option>
-                  )
-                : null}
-            </ValidatedField>
-
-            <ValidatedField id="settings-city" name="cityId" data-cy="city" label="City"  type="select" required>
-            <option value="" key="0"/>
-              {cities
-                ? cities.map(otherEntity=> 
-                    <option value={otherEntity.id}  key={otherEntity.id} >
-                      {otherEntity.name} - {otherEntity.judet.code}
-                    </option>
-                  )
-                : null}
-            </ValidatedField>
+           <ValidatedField id="post-judet" name="judet" data-cy="judet" label="Judet Post" type="select" required onChange={handleChangeJudet}>
+                <option key="0"> </option>
+                {judet.map((judet1, index) => {
+              return <option key={judet1.id}>{judet1.name}</option>
+            })}
+              </ValidatedField>
+              <ValidatedField id="post-city" name="city" data-cy="city" label="City Post" type="select" required>
+                <option key="0"> </option>
+                {judet.map((judet1, index) => {
+                if(judetTemp == '') {
+                  if(judet1.name == judetInitial){
+                      return judet1.city.map((city, index2) => {
+                          return <option key={city.id}>{city.name}</option>
+                      })
+                    }
+                } else {
+                  if(judet1.name == judetTemp){
+                    return judet1.city.map((city, index2) => {
+                        return <option key={city.id}>{city.name}</option>
+                    })
+                  }
+                }
+                })}
+              </ValidatedField>
 
             <ValidatedField
               name="address"

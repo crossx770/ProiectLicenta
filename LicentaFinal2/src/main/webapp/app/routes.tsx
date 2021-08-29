@@ -17,6 +17,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import PostUser from 'app/entities/post/post-user'
 import PostUpdate from './entities/post/post-update';
 import PostDeleteDialog from './entities/post/post-delete-dialog';
+import PostCompleteDetails from './entities/post/post-complete-details';
 import Post from 'app/entities/post/post'
 
 const Account = Loadable({
@@ -46,6 +47,7 @@ const Routes = () => {
         <ErrorBoundaryRoute path="/post/user-posts/:id/edit" exact component={PostUpdate} />
         <ErrorBoundaryRoute exact path={`/post/user-posts/:id/delete`} component={PostDeleteDialog} />
         <ErrorBoundaryRoute path="/post/new/" exact component ={PostUpdate} />
+        <ErrorBoundaryRoute path="/post-details/:id" exact component ={PostCompleteDetails} />
         <PrivateRoute path="/" component={Entities} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
         <ErrorBoundaryRoute component={PageNotFound} />
       </Switch>

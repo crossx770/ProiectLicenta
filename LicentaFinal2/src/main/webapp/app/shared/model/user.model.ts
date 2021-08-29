@@ -18,8 +18,8 @@ export interface IUser {
   address?: string;
   phone?: string;
   infoCompleted?: boolean;
-  judet?: IJudet;
-  city?: ICity;
+  judet?: string;
+  city?: string;
 }
 
 export const defaultValue: Readonly<IUser> = {
@@ -39,7 +39,7 @@ export const defaultValue: Readonly<IUser> = {
   address: '',
   phone: '',
   infoCompleted: false,
-  judet: null,
-  city: null,
+  judet: '',
+  city: '',
 
 };

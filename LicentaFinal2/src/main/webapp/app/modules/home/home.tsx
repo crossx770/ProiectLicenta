@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { faBold, faCheck } from '@fortawesome/free-solid-svg-icons';
 import cityReducer from 'app/entities/city/city.reducer';
 import { Tooltip } from '@material-ui/core'
+import style from 'app/style'
 
 export const Home = (props: RouteComponentProps<{ url: string }>) => {
   const dispatch = useAppDispatch();
@@ -31,6 +32,7 @@ export const Home = (props: RouteComponentProps<{ url: string }>) => {
 
 
   const [sorting, setSorting] = useState(false);
+  const [hover,setHover] = useState(false);
 
   const postList = useAppSelector(state => state.post.entities);
   const loading = useAppSelector(state => state.post.loading);
@@ -147,7 +149,12 @@ export const Home = (props: RouteComponentProps<{ url: string }>) => {
       subcategory: subcategoryTemp
     }));
     resetAll();
+  }
 
+
+  const rowDetails =(e) => {
+    console.log(e);
+    props.history.push("/post-details/" +e )
   }
 
   const redirectToAddPost =(e) => {
@@ -205,17 +212,17 @@ export const Home = (props: RouteComponentProps<{ url: string }>) => {
         <table width="100%">
           <tr style={{height:"15px"}}></tr>
           <tr>
+            <td> </td>
+            <td> </td>
+            <Tooltip title="Login or complete your account details to add posts" arrow disableTouchListener>
+          <td style={{width:"20%", alignContent: 'end', border:"2px", borderColor:"black"}}><Button style={{backgroundColor:"CornflowerBlue", color:'black', border:"2px", borderColor:"black"}} type='submit' block disabled = {!disable} id="button" onClick={redirectToAddPost}>Adauga anunt</Button></td></Tooltip>
           <td> </td>
           <td> </td>
-          <Tooltip title="Login or complete your account details to add posts" arrow disableTouchListener>
-        <td style={{width:"20%", alignContent: 'end', border:"2px", borderColor:"black"}}><Button style={{backgroundColor:"CornflowerBlue", color:'black', border:"2px", borderColor:"black"}} type='submit' block disabled = {!disable} id="button" onClick={redirectToAddPost}>Adauga anunt</Button></td></Tooltip>
-        <td> </td>
-        <td> </td>
-        </tr>
+          </tr>
         </table>
         </div>
       <div className="table-responsive">
-        
+        <div id ="ceva">
         <InfiniteScroll
           pageStart={paginationState.activePage}
           loadMore={handleLoadMore}
@@ -229,15 +236,17 @@ export const Home = (props: RouteComponentProps<{ url: string }>) => {
               borderSpacing:"0 15px"}}>
               <tbody>
                 {postList.map((post, i) => (
-                  <tr style={{backgroundImage:'linear-gradient(to right, LightSkyBlue,LightPink)'}} key={`entity-${i}`} data-cy="entityTable">
+                  <tr id="ceva" key={`entity-${i}`} data-cy="entityTable" onClick={() =>rowDetails(post.id)} >
                    <td >
-                     <p style={{color:'DimGrey'}}><b>{post.title}</b></p> <p>{post.description}</p>
+                     <div><p style={{color:'DimGrey'}}><b>{post.title}</b> <b style={{textAlign: 'end'}}>{post.price}</b></p></div> <p>{post.description}</p>
+                     
                     {post.created_at ? <TextFormat type="date" value={post.created_at} format={APP_DATE_FORMAT}/> : null}                      
                     
                     </td>
                     <td style={{textAlign:'end', verticalAlign:'bottom'}}>{post.category} - {post.subcategory}</td>
                     <td style={{textAlign:'end', verticalAlign:'bottom'}}> {post.judet} - {post.city} </td>
                   </tr>
+                  
                 ))}
               </tbody>
             </Table>
@@ -245,6 +254,7 @@ export const Home = (props: RouteComponentProps<{ url: string }>) => {
             !loading && <div className="alert alert-warning">No Posts found</div>
           )}
         </InfiniteScroll>
+      </div>
       </div>
     </div>
   );

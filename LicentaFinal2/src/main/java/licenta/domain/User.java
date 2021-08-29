@@ -92,19 +92,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 1, max = 85)
     private String address;
 
-    @Column("judet_id")
-    private Long judetId;
+    @Column("judet")
+    private String judet;
 
-    @JsonIgnore
-    @Transient
-    private Judet judet;
+    @Column("city")
+    private String city;
 
-    @Column("city_id")
-    private Long cityId;
-
-    @JsonIgnore
-    @Transient
-    private City city;
 
     @Column("info_completed")
     private Boolean infoCompleted;
@@ -186,23 +179,19 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.address = address;
     }
 
-    public Long getJudetId() {
-        return judetId;
-    }
-
-    public Judet getJudet() {
+    public String getJudet() {
         return judet;
     }
 
-    public void setJudet(Judet judet) {
+    public void setJudet(String judet) {
         this.judet = judet;
     }
 
-    public City getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -214,17 +203,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.infoCompleted = infoCompleted;
     }
 
-    public void setJudetId(Long judetId) {
-        this.judetId = judetId;
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
 
     public void setActivated(boolean activated) {
         this.activated = activated;

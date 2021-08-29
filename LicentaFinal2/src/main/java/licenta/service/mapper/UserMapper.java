@@ -57,8 +57,8 @@ public class UserMapper {
             user.setAuthorities(authorities);
             user.setAddress(userDTO.getAddress());
             user.setPhone(userDTO.getPhone());
-            user.setJudetId(userDTO.getJudetId());
-            user.setCityId(userDTO.getCityId());
+            user.setJudet(userDTO.getJudet());
+            user.setCity(userDTO.getCity());
             user.setInfoCompleted(userDTO.getInfoCompleted());
 
             return user;

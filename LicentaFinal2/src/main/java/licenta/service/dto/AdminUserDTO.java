@@ -57,23 +57,11 @@ public class AdminUserDTO {
     @Size(min=10,max=10)
     private String phone;
 
-    private JudetDTO judet;
+    private String judet;
 
-    private CityDTO city;
+    private String city;
 
     private boolean infoCompleted;
-
-    private Long cityId;
-
-    private Long judetId;
-
-    public Long getJudetId() {
-        return judetId;
-    }
-
-    public void setJudetId(Long judetId) {
-        this.judetId = judetId;
-    }
 
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
@@ -92,10 +80,10 @@ public class AdminUserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
-        this.cityId=user.getCityId();
+        this.judet = user.getJudet();
         this.address=user.getAddress();
         this.phone=user.getPhone();
-        this.judetId=user.getJudetId();
+        this.city = user.getCity();
         this.infoCompleted = user.getInfoCompleted();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
@@ -134,14 +122,6 @@ public class AdminUserDTO {
 
     public String getEmail() {
         return email;
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
     }
 
     public void setEmail(String email) {
@@ -190,6 +170,22 @@ public class AdminUserDTO {
 
     public String getLastModifiedBy() {
         return lastModifiedBy;
+    }
+
+    public String getJudet() {
+        return judet;
+    }
+
+    public void setJudet(String judet) {
+        this.judet = judet;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void setLastModifiedBy(String lastModifiedBy) {
@@ -250,21 +246,7 @@ public class AdminUserDTO {
         this.phone = phone;
     }
 
-    public JudetDTO getJudet() {
-        return judet;
-    }
 
-    public void setJudet(JudetDTO judet) {
-        this.judet = judet;
-    }
-
-    public CityDTO getCity() {
-        return city;
-    }
-
-    public void setCity(CityDTO city) {
-        this.city = city;
-    }
 
     public boolean isInfoCompleted() {
         return infoCompleted;

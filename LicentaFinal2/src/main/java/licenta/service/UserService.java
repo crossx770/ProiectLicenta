@@ -258,7 +258,7 @@ public class UserService {
      * @return a completed {@link Mono}.
      */
     @Transactional
-    public Mono<Void> updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, Long cityId,Long judetId,String phone, String address) {
+    public Mono<Void> updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, String city,String judet,String phone, String address) {
 
         return SecurityUtils
             .getCurrentUserLogin()
@@ -272,8 +272,8 @@ public class UserService {
                     }
                     user.setLangKey(langKey);
                     user.setImageUrl(imageUrl);
-                    user.setCityId(cityId);
-                    user.setJudetId(judetId);
+                    user.setCity(city);
+                    user.setJudet(judet);
                     user.setAddress(address);
                     user.setPhone(phone);
                     user.setInfoCompleted(true);

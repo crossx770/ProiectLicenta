@@ -31,9 +31,9 @@ public class UserDTO {
     @Size(min=10,max=10)
     private String phone;
 
-    private JudetDTO judet;
+    private String judet;
 
-    private CityDTO city;
+    private String city;
 
     private Boolean infoCompleted;
 
@@ -49,15 +49,8 @@ public class UserDTO {
         this.lastName=user.getLastName();
         this.address=user.getAddress();
         this.phone=user.getPhone();
-        if(user.getJudet() != null) {
-            this.judet.setId(user.getJudet().getId());
-            this.judet.setCode(user.getJudet().getCode());
-            this.judet.setName(user.getJudet().getName());
-        }
-        if(user.getCity() != null){
-            this.city.setId(user.getCity().getId());
-            this.city.setName(user.getCity().getName());
-        }
+        this.judet=user.getJudet();
+        this.city=user.getCity();
         this.infoCompleted=user.getInfoCompleted();
     }
 
@@ -109,19 +102,19 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public JudetDTO getJudet() {
+    public String getJudet() {
         return judet;
     }
 
-    public void setJudet(JudetDTO judet) {
+    public void setJudet(String judet) {
         this.judet = judet;
     }
 
-    public CityDTO getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(CityDTO city) {
+    public void setCity(String city) {
         this.city = city;
     }
 

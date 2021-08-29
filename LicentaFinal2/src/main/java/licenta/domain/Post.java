@@ -6,6 +6,7 @@ import java.time.Instant;
 import javax.validation.constraints.*;
 
 import licenta.security.SecurityUtils;
+import lombok.With;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -49,13 +50,11 @@ public class Post implements Serializable {
     @Column("user_post_id")
     private Long user_postId;
 
-
     @Column("judet")
     private String judet;
 
     @Column("city")
     private String city;
-
 
     @Column("category")
     private String category;
@@ -215,6 +214,7 @@ public class Post implements Serializable {
     public void setSubcategory(String subcategory) {
         this.subcategory = subcategory;
     }
+
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

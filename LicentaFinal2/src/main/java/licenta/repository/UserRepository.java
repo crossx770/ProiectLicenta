@@ -178,8 +178,8 @@ class UserSqlHelper {
         columns.add(Column.aliased("info_completed", table, columnPrefix + "_info_completed"));
         columns.add(Column.aliased("phone", table, columnPrefix + "_phone"));
         columns.add(Column.aliased("address", table, columnPrefix + "_address"));
-        columns.add(Column.aliased("judet_id", table, columnPrefix + "_judet_id"));
-        columns.add(Column.aliased("city_id", table, columnPrefix + "_city_id"));
+        columns.add(Column.aliased("judet", table, columnPrefix + "_judet"));
+        columns.add(Column.aliased("city", table, columnPrefix + "_city"));
         return columns;
     }
 }

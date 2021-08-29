@@ -34,7 +34,6 @@ export const PostUser = (props: RouteComponentProps<{ url: string }>) => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
-        query: account.id
       })
     );
   };

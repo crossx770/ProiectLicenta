@@ -20,8 +20,12 @@ Main page styles
   border-bottom: 24px !important;
   background-color: azure;
 }
-.tr {
-  display:table-row;
-  border-bottom: 24px !important;
+
+#ceva tr {
+  background-image:linear-gradient(to right, LightSkyBlue,LightPink)  !important
 }
+
+#ceva tr:hover {
+   background-image:linear-gradient(to left, LightSkyBlue,LightPink) !important
+ }
 

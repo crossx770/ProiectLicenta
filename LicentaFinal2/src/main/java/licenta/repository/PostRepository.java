@@ -1,6 +1,7 @@
 package licenta.repository;
 
 import licenta.domain.Post;
+import licenta.service.dto.PostDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
@@ -21,7 +22,7 @@ public interface PostRepository extends R2dbcRepository<Post, Long>, PostReposit
     @Query("SELECT * FROM post entity WHERE entity.judet = :judet AND entity.city = :city AND entity.category = :category AND entity.subcategory = :subcategory")
     Flux<Post> findAllByCriteria(String judet, String city, String category, String subcategory, Pageable pageable);
 
-    @Query("SELECT * FROM post entity LEFT JOIN jhi_user u ON u.id = entity.user_post_id WHERE u.login = :user")
+    @Query("SELECT * FROM post entity JOIN jhi_user u ON u.id = entity.user_post_id WHERE u.login = :user")
     Flux<Post> findAllByUser(Pageable pageable, String user);
 
     @Query("SELECT * FROM post entity WHERE entity.user_post_id = :id")

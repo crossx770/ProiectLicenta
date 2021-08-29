@@ -12,6 +12,6 @@ import org.mapstruct.*;
     uses = { UserMapper.class }
 )
 public interface PostMapper extends EntityMapper<PostDTO, Post> {
-    @Mapping(target = "user_post", source = "user_post", qualifiedByName = "login")
+    @Mapping(target = "user_post", source = "user_post")
     PostDTO toDto(Post s);
 }

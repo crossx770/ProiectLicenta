@@ -22,6 +22,15 @@ a {
   }
 }
 
+
+#boostrapoveride .tr {
+  background-image:'linear-gradient(to right, LightSkyBlue,LightPink)'  !important
+}
+
+#bootstrapoveride .tr:hover {
+  background-image:'linear-gradient(to left, LightSkyBlue,LightPink)' !important
+}
+
 .app-container {
   box-sizing: border-box;
   .view-container {
